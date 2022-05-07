@@ -1,0 +1,58 @@
+{
+  "extends": [
+    "plugin:unicorn/recommended",
+    "plugin:promise/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "plugin:@next/next/recommended",
+    "plugin:react/jsx-runtime",
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": ["/next-env.d.ts", "/next.config.js"],
+  "rules": {
+    // discouraged, but unfixable on external objects
+    "no-underscore-dangle": 0,
+    // debatable and interferes with function typing (eg. React.FC)
+    "react/function-component-definition": 0,
+    // no React PropTypes, TypeScript encouraged
+    "react/prop-types": 0,
+    // allow special comments (eg. TODO)
+    "spaced-comment": [2, "always", { "markers": ["TODO", "FIXME", "/"] }],
+    // not feasible, too many exceptions (eg. getStaticProps)
+    "unicorn/prevent-abbreviations": 0,
+    // prevents explicit null returns
+    "unicorn/no-null": 0,
+    // camelCase is more consistent with exports than the default kebap-case,
+    "unicorn/filename-case": [
+      1,
+      {
+        "case": "camelCase"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["components/*"],
+      "rules": {
+        // named exports and PascalCase for components
+        "import/prefer-default-export": 0,
+        "import/no-default-export": 2,
+
+        "unicorn/filename-case": [
+          1,
+          {
+            "case": "pascalCase"
+          }
+        ]
+      }
+    }
+  ]
+}

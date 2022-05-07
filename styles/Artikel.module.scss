@@ -1,16 +1,69 @@
 @use 'color';
 
+.banner {
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 5rem;
+  padding: 0.5rem;
+
+  background: linear-gradient(color.$primary 0 50%, transparent);
+  color: white;
+
+  display: flex;
+  align-items: flex-start;
+
+  @media (min-width: 426px) {
+    height: 7rem;
+  }
+
+  & + * {
+    margin-top: -2.5rem;
+
+    @media (min-width: 426px) {
+      margin-top: -3.5rem;
+    }
+  }
+}
+
+.logo {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  &Icon {
+    margin-right: 0.3rem;
+    overflow: visible;
+    font-size: 1.9rem;
+    border-radius: 500px;
+    background-color: color.$primary;
+
+    @media (min-width: 426px) {
+      font-size: 2.9rem;
+    }
+  }
+
+  &Name {
+    font-family: 'Pacifico', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Verdana,
+      sans-serif;
+    line-height: 1rem;
+    font-size: 1.4rem;
+
+    @media (min-width: 426px) {
+      font-size: 1.9rem;
+    }
+  }
+}
+
 .main {
   padding: 1rem;
 
   @media (min-width: 1025px) {
     padding: 1rem 3rem;
   }
-}
-
-.title {
-  font-size: 2.5rem;
-  color: color.$primary;
 }
 
 .categories {
@@ -58,6 +111,17 @@
   }
   &:nth-child(6) {
     background-color: lightpink;
+  }
+}
+
+.title {
+  font-family: 'Pacifico', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Verdana, sans-serif;
+  text-shadow: 2px 2px 2px lightblue;
+  font-size: 2.1rem;
+  color: color.$primary;
+
+  @media (min-width: 426px) {
+    font-size: 2.5rem;
   }
 }
 

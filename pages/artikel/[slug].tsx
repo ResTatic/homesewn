@@ -2,7 +2,10 @@ import { PortableText } from '@portabletext/react'
 import imageUrlBuilder from '@sanity/image-url'
 import groq from 'groq'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
+import { GiSewingNeedle } from 'react-icons/gi'
 import sanityClient from '../../lib/sanityClient'
 import type {
   Post as PostType,
@@ -32,7 +35,7 @@ function getMainImageComp(sanityImage: SanityImage) {
     .size(1000, 400)
     .auto('format')
     .url()
-  return <Image src={imgUrl} loading="lazy" layout="responsive" width={1000} height={400} />
+  return <Image src={imgUrl} priority layout="responsive" width={1000} height={400} />
 }
 
 function getBodyImageComp(sanityImage: SanityImage) {
@@ -57,7 +60,19 @@ const ptComponents = {
 
 const Post: NextPage<Props> = ({ post: { title, mainImage, body, categories } }) => (
   <article>
-    {mainImage && getMainImageComp(mainImage)}
+    <Head>
+      <title>{title} - Homesewn</title>
+    </Head>
+
+    <section className={styles.banner}>
+      <Link href="/">
+        <span className={styles.logo}>
+          <GiSewingNeedle className={styles.logoIcon} />
+          <span className={styles.logoName}>Homesewn</span>
+        </span>
+      </Link>
+    </section>
+    {mainImage && <div className={styles.mainImage}>{getMainImageComp(mainImage)}</div>}
     <div className={styles.main}>
       {categories && categories.length > 0 && (
         <ul className={styles.categories}>
@@ -80,8 +95,8 @@ const Post: NextPage<Props> = ({ post: { title, mainImage, body, categories } })
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const slug = (context.params?.slug as string) ?? ''
-  const post = await sanityClient.fetch<PostType>(
-    groq`*[_type == "post" && slug.current == $slug][0]
+  const post = await sanityClient.fetch<PostType | null>(
+    groq`*[_type == "post" && slug.current == $slug && publishedAt < now()][0]
       {...,"categories": categories[]->{"id": _id, title}}`,
     { slug }
   )

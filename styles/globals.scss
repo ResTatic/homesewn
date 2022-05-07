@@ -1,18 +1,19 @@
+@use 'color';
+
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #181a1b;
-  color: white;
+    Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
+  text-decoration: underline color.$secondary 2px;
+  color: color.$secondary;
+  font-weight: bold;
 }

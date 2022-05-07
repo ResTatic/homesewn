@@ -1,0 +1,16 @@
+{
+  "project": {
+    "name": "momblog-studio"
+  },
+  "api": {
+    "projectId": "avejjwu6",
+    "dataset": "production"
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./momblog-studio/schemas/schema"
+    }
+  ],
+  "slug": "ein-beispielartikel"
+}

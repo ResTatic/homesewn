@@ -109,12 +109,12 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await sanityClient.fetch<string[]>(
-    groq`*[_type == "post" && defined(slug.current)][].slug.current`
+    groq`*[_type == "post" && defined(slug.current) && publishedAt < now()][].slug.current`
   )
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
+    fallback: false,
   }
 }
 

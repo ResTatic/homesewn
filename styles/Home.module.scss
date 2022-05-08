@@ -90,6 +90,11 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.08);
+  }
 
   &Title {
     margin-top: 1.4rem;

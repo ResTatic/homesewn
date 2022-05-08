@@ -62,7 +62,7 @@ const Home: NextPage<Props> = ({ posts }: Props) => (
       {posts.length > 0 && (
         <ul className={styles.cards}>
           {posts.map((post) => (
-            <Link href={`/artikel/${post.slug.current}`}>
+            <Link key={post._id} href={`/artikel/${post.slug.current}`}>
               <li className={styles.card}>
                 {post.mainImage && getCardImageComp(post.mainImage)}
                 <div className={styles.cardTitle}>{post.title}</div>

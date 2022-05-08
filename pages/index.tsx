@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GiSewingNeedle } from 'react-icons/gi'
-import sanityClient from '../lib/sanityClient'
+import { cdnClient, liveClient } from '../lib/sanityClient'
 import type {
   Post as PostType,
   SanityImageAsset,
@@ -31,11 +31,7 @@ interface Props {
 }
 
 function getCardImageComp(sanityImage: SanityImage) {
-  const imgUrl = imageUrlBuilder(sanityClient)
-    .image(sanityImage)
-    .size(240, 160)
-    .auto('format')
-    .url()
+  const imgUrl = imageUrlBuilder(cdnClient).image(sanityImage).size(240, 160).auto('format').url()
   return <Image src={imgUrl} loading="lazy" layout="intrinsic" width={240} height={160} />
 }
 
@@ -76,7 +72,7 @@ const Home: NextPage<Props> = ({ posts }: Props) => (
 )
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await sanityClient.fetch<PostType[]>(
+  const posts = await liveClient.fetch<PostType[]>(
     groq`*[_type == "post" && publishedAt < now()] | order(publishedAt desc)[0..3]
       {..., "categories": categories[]->{"id": _id, title}}`
   )

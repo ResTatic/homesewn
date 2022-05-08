@@ -6,7 +6,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GiSewingNeedle } from 'react-icons/gi'
-import sanityClient from '../../lib/sanityClient'
+import { cdnClient, liveClient } from '../../lib/sanityClient'
 import type {
   Post as PostType,
   SanityImageAsset,
@@ -30,20 +30,12 @@ interface Props {
 }
 
 function getMainImageComp(sanityImage: SanityImage) {
-  const imgUrl = imageUrlBuilder(sanityClient)
-    .image(sanityImage)
-    .size(1000, 400)
-    .auto('format')
-    .url()
+  const imgUrl = imageUrlBuilder(cdnClient).image(sanityImage).size(1000, 400).auto('format').url()
   return <Image src={imgUrl} priority layout="responsive" width={1000} height={400} />
 }
 
 function getBodyImageComp(sanityImage: SanityImage) {
-  const imgUrl = imageUrlBuilder(sanityClient)
-    .image(sanityImage)
-    .size(500, 500)
-    .auto('format')
-    .url()
+  const imgUrl = imageUrlBuilder(cdnClient).image(sanityImage).size(500, 500).auto('format').url()
   return <Image src={imgUrl} loading="lazy" layout="intrinsic" width={500} height={500} />
 }
 
@@ -95,7 +87,7 @@ const Post: NextPage<Props> = ({ post: { title, mainImage, body, categories } })
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const slug = (context.params?.slug as string) ?? ''
-  const post = await sanityClient.fetch<PostType | null>(
+  const post = await liveClient.fetch<PostType | null>(
     groq`*[_type == "post" && slug.current == $slug && publishedAt < now()][0]
       {...,"categories": categories[]->{"id": _id, title}}`,
     { slug }
@@ -108,7 +100,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await sanityClient.fetch<string[]>(
+  const paths = await liveClient.fetch<string[]>(
     groq`*[_type == "post" && defined(slug.current) && publishedAt < now()][].slug.current`
   )
 

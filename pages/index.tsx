@@ -39,7 +39,6 @@ const Home: NextPage<Props> = ({ posts }: Props) => (
   <article>
     <Head>
       <title>Homesewn - Nähen, Basteln, Landleben</title>
-      <link rel="icon" href="/favicon.ico" />
     </Head>
 
     <section className={styles.hero}>

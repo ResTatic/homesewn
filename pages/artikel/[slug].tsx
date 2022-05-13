@@ -29,14 +29,32 @@ interface Props {
   }
 }
 
+function getImageUrl(sanityImage: SanityImage, width: number, height: number) {
+  return imageUrlBuilder(cdnClient).image(sanityImage).size(width, height).auto('format').url()
+}
+
 function getMainImageComp(sanityImage: SanityImage) {
-  const imgUrl = imageUrlBuilder(cdnClient).image(sanityImage).size(1000, 400).auto('format').url()
-  return <Image src={imgUrl} priority layout="responsive" width={1000} height={400} />
+  return (
+    <Image
+      src={getImageUrl(sanityImage, 1000, 400)}
+      priority
+      layout="responsive"
+      width={1000}
+      height={400}
+    />
+  )
 }
 
 function getBodyImageComp(sanityImage: SanityImage) {
-  const imgUrl = imageUrlBuilder(cdnClient).image(sanityImage).size(500, 500).auto('format').url()
-  return <Image src={imgUrl} loading="lazy" layout="intrinsic" width={500} height={500} />
+  return (
+    <Image
+      src={getImageUrl(sanityImage, 500, 500)}
+      loading="lazy"
+      layout="intrinsic"
+      width={500}
+      height={500}
+    />
+  )
 }
 
 const ptComponents = {
@@ -50,10 +68,21 @@ const ptComponents = {
   },
 }
 
-const Post: NextPage<Props> = ({ post: { title, mainImage, body, categories } }) => (
+const Post: NextPage<Props> = ({ post: { title, slug, mainImage, body, categories } }) => (
   <article>
     <Head>
-      <title>{title} - Homesewn</title>
+      <title>{`${title} - Homesewn`}</title>
+      <meta property="og:title" content={title} />
+      <meta property="og:type" content="article" />
+      <meta
+        property="og:description"
+        content="Homesewn - Alles zum Thema Nähen, Basteln und Landleben."
+      />
+      <meta property="og:url" content={`https://momblog.vercel.app/artikel/${slug.current}`} />
+      <meta property="og:site_name" content="Homesewn" />
+
+      {mainImage && <meta property="og:image" content={getImageUrl(mainImage, 500, 500)} />}
+      <meta name="twitter:card" content="summary_large_image" />
     </Head>
 
     <section className={styles.banner}>

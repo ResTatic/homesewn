@@ -39,6 +39,12 @@ const Home: NextPage<Props> = ({ posts }: Props) => (
   <article>
     <Head>
       <title>Homesewn - Nähen, Basteln, Landleben</title>
+      <meta property="og:title" content="Homesewn" />
+      <meta property="og:type" content="website" />
+      <meta property="og:description" content="Alles zum Thema Nähen, Basteln und Landleben." />
+      <meta property="og:url" content="https://momblog.vercel.app" />
+      <meta property="og:site_name" content="Homesewn" />
+      <meta name="twitter:card" content="summary_large_image" />
     </Head>
 
     <section className={styles.hero}>

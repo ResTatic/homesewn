@@ -1,4 +1,7 @@
-Next.js Blog frontend with Sanity CMS.
+A fully static Next.js Blog, with content from Sanity CMS.
+Dynamically updated on content change via webhook and on-demand revalidation.
+
+Sewing needle icon made by Lorc on [game-icons.net](https://game-icons.net/1x1/lorc/sewing-needle.html).
 
 ## Running
 

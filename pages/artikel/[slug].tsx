@@ -121,11 +121,16 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
       {...,"categories": categories[]->{"id": _id, title}}`,
     { slug }
   )
-  return {
-    props: {
-      post,
-    },
-  }
+
+  return post
+    ? {
+        props: {
+          post,
+        },
+      }
+    : {
+        notFound: true,
+      }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -135,7 +140,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 

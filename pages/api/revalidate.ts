@@ -21,12 +21,10 @@ export default async function handler(
   }
 
   const { slug } = req.body
-
   try {
-    await res.unstable_revalidate(`/artikel/${slug}`)
-    await res.unstable_revalidate('/')
+    await Promise.all([res.unstable_revalidate('/'), res.unstable_revalidate(`/artikel/${slug}`)])
     return res.send(`${slug} and home revalidated successfully`)
-  } catch {
-    return res.status(500).send('Error revalidating')
+  } catch (error) {
+    return res.status(500).send(`Error revalidating: ${(error as Error).message}`)
   }
 }

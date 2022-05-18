@@ -4,6 +4,14 @@ const nextConfig = {
   images: {
     domains: ['cdn.sanity.io'],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/artikel',
+        destination: '/',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

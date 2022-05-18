@@ -14,6 +14,10 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#5f9ea0" />
 
           <link
+            href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+            rel="stylesheet"
+          />
+          <link
             href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
             rel="stylesheet"
           />

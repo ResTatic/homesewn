@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GiSewingNeedle } from 'react-icons/gi'
+import { Footer } from '../components/Footer'
 import { cdnClient, liveClient } from '../lib/sanityClient'
 import type {
   Post,
@@ -72,6 +73,7 @@ const Home: NextPage<Props> = ({ posts, category }) => (
         </ul>
       )}
     </section>
+    <Footer />
   </article>
 )
 

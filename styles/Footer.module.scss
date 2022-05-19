@@ -1,0 +1,8 @@
+@use 'color';
+
+.footer {
+  margin-top: 1rem;
+  height: 4vh;
+
+  background: linear-gradient(transparent, color.$primary);
+}

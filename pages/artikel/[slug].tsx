@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GiSewingNeedle } from 'react-icons/gi'
+import { Footer } from '../../components/Footer'
 import { cdnClient, liveClient } from '../../lib/sanityClient'
 import type {
   Post as PostType,
@@ -112,6 +113,7 @@ const Post: NextPage<Props> = ({ post: { title, slug, mainImage, body, categorie
         </section>
       )}
     </div>
+    <Footer />
   </article>
 )
 

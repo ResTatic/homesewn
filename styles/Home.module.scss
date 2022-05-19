@@ -2,10 +2,10 @@
 
 .hero {
   z-index: 1;
-  height: 60vh;
-  padding-bottom: 20vh;
+  height: 48vh;
+  padding-bottom: 16vh;
 
-  background: linear-gradient(color.$primary 0 66%, transparent);
+  background: linear-gradient(color.$primary 0 75%, transparent);
   color: white;
   font-family: 'Pacifico', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Verdana,
     sans-serif;
@@ -14,14 +14,6 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-
-  & + * {
-    margin-top: -2.5rem;
-
-    @media (min-width: 426px) {
-      margin-top: -3.5rem;
-    }
-  }
 }
 
 .logo {
@@ -37,7 +29,6 @@
     margin-right: 0.3rem;
     overflow: visible;
     font-size: 6rem;
-    border-radius: 500px;
     background-color: color.$primary;
   }
 
@@ -59,7 +50,7 @@
 }
 
 .main {
-  margin: 0 2rem 3rem;
+  margin: 0 2rem;
 
   display: flex;
   flex-flow: column nowrap;

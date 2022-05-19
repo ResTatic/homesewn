@@ -59,13 +59,14 @@
 }
 
 .main {
-  margin-bottom: 2rem;
+  margin: 0 2rem 3rem;
 
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
 
   color: color.$primary;
+  text-align: center;
 }
 
 .cards {

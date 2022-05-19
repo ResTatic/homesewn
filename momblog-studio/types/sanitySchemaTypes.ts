@@ -108,6 +108,13 @@ export interface Category extends SanityDocument {
   title: string;
 
   /**
+   * Link-Name — `slug`
+   *
+   * Titel eingeben, dann einfach auf "Generate" clicken ;)
+   */
+  slug: { _type: "slug"; current: string };
+
+  /**
    * Beschreibung — `text`
    *
    *

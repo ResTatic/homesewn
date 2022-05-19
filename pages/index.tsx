@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { GiSewingNeedle } from 'react-icons/gi'
 import { cdnClient, liveClient } from '../lib/sanityClient'
 import type {
-  Post as PostType,
+  Post,
   SanityImageAsset,
   SanityReference,
 } from '../momblog-studio/types/sanitySchemaTypes' // eslint-disable-line import/no-relative-packages
@@ -18,16 +18,12 @@ interface SanityImage {
 }
 
 interface Props {
-  posts: [
-    Omit<PostType, 'categories'> & {
-      categories?: [
-        {
-          id: string
-          title: string
-        }
-      ]
+  posts?: [
+    Omit<Post, 'categories'> & {
+      categories: string[]
     }
   ]
+  category?: string
 }
 
 function getCardImageComp(sanityImage: SanityImage) {
@@ -35,7 +31,7 @@ function getCardImageComp(sanityImage: SanityImage) {
   return <Image src={imgUrl} loading="lazy" layout="intrinsic" width={240} height={160} />
 }
 
-const Home: NextPage<Props> = ({ posts }: Props) => (
+const Home: NextPage<Props> = ({ posts, category }) => (
   <article>
     <Head>
       <title>Homesewn - Nähen, Basteln, Landleben</title>
@@ -59,8 +55,11 @@ const Home: NextPage<Props> = ({ posts }: Props) => (
       </Link>
     </section>
     <section className={styles.main}>
-      <h2>Neueste Artikel </h2>
-      {posts.length > 0 && (
+      <h2>
+        {posts && posts.length > 0 ? 'Neueste' : 'Keine'} Artikel
+        {category && ` zum Thema ${category}`}
+      </h2>
+      {posts && posts.length > 0 && (
         <ul className={styles.cards}>
           {posts.map((post) => (
             <Link key={post._id} href={`/artikel/${post.slug.current}`}>
@@ -77,9 +76,10 @@ const Home: NextPage<Props> = ({ posts }: Props) => (
 )
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await liveClient.fetch<PostType[]>(
-    groq`*[_type == "post" && publishedAt < now()] | order(publishedAt desc)[0..3]
-      {..., "categories": categories[]->{"id": _id, title}}`
+  const posts = await liveClient.fetch<Post[]>(
+    groq`*[_type == "post" && publishedAt < now()]
+      | order(publishedAt desc)[0...8]
+      {..., "categories": categories[]->title}`
   )
   return {
     props: {

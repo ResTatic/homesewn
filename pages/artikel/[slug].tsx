@@ -23,6 +23,7 @@ interface Props {
     categories?: [
       {
         id: string
+        slug: string
         title: string
       }
     ]
@@ -98,9 +99,9 @@ const Post: NextPage<Props> = ({ post: { title, slug, mainImage, body, categorie
       {categories && categories.length > 0 && (
         <ul className={styles.categories}>
           {categories.map((cat) => (
-            <li key={cat.id} className={styles.category}>
-              {cat.title}
-            </li>
+            <Link key={cat.id} href={{ pathname: `/${cat.slug}` }}>
+              <li className={styles.category}>{cat.title}</li>
+            </Link>
           ))}
         </ul>
       )}
@@ -115,10 +116,10 @@ const Post: NextPage<Props> = ({ post: { title, slug, mainImage, body, categorie
 )
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
-  const slug = (context.params?.slug as string) ?? ''
+  const slug = (context.params?.slug as string | undefined) ?? null
   const post = await liveClient.fetch<PostType | null>(
     groq`*[_type == "post" && slug.current == $slug && publishedAt < now()][0]
-      {...,"categories": categories[]->{"id": _id, title}}`,
+      {...,"categories": categories[]->{"id": _id, "slug": slug.current, title}}`,
     { slug }
   )
 
@@ -134,12 +135,12 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await liveClient.fetch<string[]>(
-    groq`*[_type == "post" && defined(slug.current) && publishedAt < now()][].slug.current`
+  const slugs = await liveClient.fetch<string[]>(
+    groq`*[_type == "post" && publishedAt < now()].slug.current`
   )
 
   return {
-    paths: paths.map((slug) => ({ params: { slug } })),
+    paths: slugs.map((slug) => ({ params: { slug } })),
     fallback: 'blocking',
   }
 }

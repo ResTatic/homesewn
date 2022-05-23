@@ -12,6 +12,10 @@ body {
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Nunito', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Verdana, sans-serif;
 }

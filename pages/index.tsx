@@ -44,18 +44,18 @@ const Home: NextPage<Props> = ({ posts, category }) => (
       <meta name="twitter:card" content="summary_large_image" />
     </Head>
 
-    <section className={styles.hero}>
-      <Link href="/">
-        <>
-          <div className={styles.logo}>
+    <Link href="#main">
+      <section className={styles.landing}>
+        <div className={styles.logo}>
+          <div className={styles.logoMain}>
             <GiSewingNeedle className={styles.logoIcon} />
-            <span className={styles.logoName}>Homesewn</span>
+            Homesewn
           </div>
           <div className={styles.logoSub}>Nähen - Basteln - Landleben</div>
-        </>
-      </Link>
-    </section>
-    <section className={styles.main}>
+        </div>
+      </section>
+    </Link>
+    <section className={styles.main} id="main">
       <h2>
         {posts && posts.length > 0 ? 'Neueste' : 'Keine'} Artikel
         {category && ` zum Thema ${category}`}

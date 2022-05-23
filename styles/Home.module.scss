@@ -1,63 +1,81 @@
 @use 'color';
 
-.hero {
-  z-index: 1;
-  height: 48vh;
-  padding-bottom: 16vh;
+.landing {
+  height: 125vh;
+  margin-bottom: 16vh;
 
-  background: linear-gradient(color.$primary 0 75%, transparent);
-  color: white;
+  background: linear-gradient(color.$primary 0 50%, transparent);
+}
+
+.logo {
+  position: fixed;
+  // top offset and height to better support iphone safari bottom bar
+  top: 25vh;
+  right: 0;
+  left: 0;
+  min-height: 40vh;
+
   font-family: 'Pacifico', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Verdana,
     sans-serif;
+  color: white;
+  font-size: 3rem;
 
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-}
 
-.logo {
-  margin-bottom: 1rem;
-  cursor: pointer;
+  @media (min-width: 1025px) {
+    font-size: 5rem;
+  }
 
-  color: white;
+  &Main {
+    margin-bottom: 1rem;
 
-  display: flex;
-  align-items: center;
+    cursor: pointer;
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    opacity: 0;
+    animation: fadein 3s ease 0.5s forwards;
+  }
 
   &Icon {
     margin-right: 0.3rem;
     overflow: visible;
-    font-size: 6rem;
-    background-color: color.$primary;
-  }
-
-  &Name {
-    font-family: 'Pacifico', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Verdana,
-      sans-serif;
-    line-height: 1rem;
-    font-size: 3rem;
+    font-size: 1.6em;
   }
 
   &Sub {
     cursor: pointer;
 
-    font-size: 1.5rem;
+    font-size: 0.5em;
     font-style: italic;
-    font-family: 'Pacifico', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Verdana,
-      sans-serif;
+
+    opacity: 0;
+    animation: fadein 3s ease 2s forwards;
   }
 }
 
 .main {
-  margin: 0 2rem;
+  z-index: 1;
+  min-height: 94.9vh;
+  padding: 2rem;
+
+  background-color: white;
+  color: color.$primary;
+  text-align: center;
 
   display: flex;
   flex-flow: column nowrap;
+  justify-content: center;
   align-items: center;
 
-  color: color.$primary;
-  text-align: center;
+  & > h2 {
+    margin-top: 0;
+  }
 }
 
 .cards {
@@ -95,5 +113,14 @@
     font-size: 1.3rem;
     font-weight: bold;
     font-style: italic;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

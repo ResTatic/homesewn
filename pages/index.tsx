@@ -11,7 +11,7 @@ import type {
   Post,
   SanityImageAsset,
   SanityReference,
-} from '../momblog-studio/types/sanitySchemaTypes' // eslint-disable-line import/no-relative-packages
+} from '../homesewn-studio/types/sanitySchemaTypes' // eslint-disable-line import/no-relative-packages
 import styles from '../styles/Home.module.scss'
 
 interface SanityImage {
@@ -39,7 +39,7 @@ const Home: NextPage<Props> = ({ posts, category }) => (
       <meta property="og:title" content="Homesewn" />
       <meta property="og:type" content="website" />
       <meta property="og:description" content="Alles zum Thema Nähen, Basteln und Landleben." />
-      <meta property="og:url" content="https://momblog.vercel.app" />
+      <meta property="og:url" content="https://homesewn.vercel.app" />
       <meta property="og:site_name" content="Homesewn" />
       <meta name="twitter:card" content="summary_large_image" />
     </Head>

@@ -1,6 +1,6 @@
 {
   "project": {
-    "name": "momblog-studio"
+    "name": "homesewn-studio"
   },
   "api": {
     "projectId": "avejjwu6",
@@ -9,7 +9,7 @@
   "parts": [
     {
       "name": "part:@sanity/base/schema",
-      "path": "./momblog-studio/schemas/schema"
+      "path": "./homesewn-studio/schemas/schema"
     }
   ],
   "slug": "ein-beispielartikel"

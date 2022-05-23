@@ -2,7 +2,7 @@ import groq from 'groq'
 import type { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
 import Home from '.'
 import { liveClient } from '../lib/sanityClient'
-import type { Post } from '../momblog-studio/types/sanitySchemaTypes' // eslint-disable-line import/no-relative-packages
+import type { Post } from '../homesewn-studio/types/sanitySchemaTypes' // eslint-disable-line import/no-relative-packages
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   const slug = (context.params?.category as string | undefined) ?? null

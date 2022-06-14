@@ -107,7 +107,7 @@ const Post: NextPage<Props> = ({ post: { title, slug, mainImage, body, categorie
         {categories && categories.length > 0 && (
           <ul className={styles.categories}>
             {categories.map((cat) => (
-              <Link key={cat.id} href={{ pathname: `/${cat.slug}` }}>
+              <Link key={cat.id} href={`/${cat.slug}#main`}>
                 <li className={styles.category}>{cat.title}</li>
               </Link>
             ))}

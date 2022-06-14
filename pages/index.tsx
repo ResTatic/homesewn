@@ -72,6 +72,13 @@ const Home: NextPage<Props> = ({ posts, category }) => (
           ))}
         </ul>
       )}
+      {category && (
+        <div style={{ marginTop: '1rem' }}>
+          <Link href="/#main" scroll={false}>
+            Alle Artikel ansehen
+          </Link>
+        </div>
+      )}
     </section>
     <Footer />
   </article>

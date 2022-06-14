@@ -1,3 +1,4 @@
+@use 'breakpoints';
 @use 'color';
 
 .banner {
@@ -16,7 +17,7 @@
   display: flex;
   align-items: flex-start;
 
-  @media (min-width: 426px) {
+  @media (min-width: breakpoints.$tablet) {
     height: 7rem;
   }
 }
@@ -34,7 +35,7 @@
     font-size: 1.9rem;
     background-color: color.$primary;
 
-    @media (min-width: 426px) {
+    @media (min-width: breakpoints.$tablet) {
       font-size: 2.9rem;
     }
   }
@@ -45,21 +46,23 @@
     line-height: 1rem;
     font-size: 1.4rem;
 
-    @media (min-width: 426px) {
+    @media (min-width: breakpoints.$tablet) {
       font-size: 1.9rem;
     }
   }
 }
 
-.mainImage {
+.bannerImage {
+  display: block;
   z-index: -1;
   position: sticky;
   margin-top: -2.5rem;
   top: 2.5rem;
   right: 0;
   left: 0;
+  max-height: 60vh;
 
-  @media (min-width: 426px) {
+  @media (min-width: breakpoints.$tablet) {
     top: 3.5rem;
     margin-top: -3.5rem;
   }
@@ -69,8 +72,13 @@
   padding: 1rem 1rem 2rem;
   background-color: white;
 
-  @media (min-width: 1025px) {
+  @media (min-width: breakpoints.$desktop) {
     padding: 1rem 3rem;
+  }
+
+  &Content {
+    max-width: breakpoints.$desktop;
+    margin: 0 auto;
   }
 }
 
@@ -155,5 +163,9 @@
 
       background-color: color.$primary;
     }
+  }
+
+  &Image {
+    text-align: center;
   }
 }

@@ -35,27 +35,33 @@ function getImageUrl(sanityImage: SanityImage, width: number, height: number) {
   return imageUrlBuilder(cdnClient).image(sanityImage).size(width, height).auto('format').url()
 }
 
-function getMainImageComp(sanityImage: SanityImage) {
+function getBannerImageComp(sanityImage: SanityImage) {
   return (
-    <Image
-      src={getImageUrl(sanityImage, 1000, 400)}
-      priority
-      layout="responsive"
-      width={1000}
-      height={400}
-    />
+    <div className={styles.bannerImage}>
+      <Image
+        src={getImageUrl(sanityImage, 1000, 400)}
+        priority
+        layout="responsive"
+        width={1000}
+        height={400}
+        className={styles.bannerImage}
+      />
+    </div>
   )
 }
 
 function getBodyImageComp(sanityImage: SanityImage) {
   return (
-    <Image
-      src={getImageUrl(sanityImage, 500, 500)}
-      loading="lazy"
-      layout="intrinsic"
-      width={500}
-      height={500}
-    />
+    <div className={styles.bodyImage}>
+      <Image
+        src={getImageUrl(sanityImage, 500, 500)}
+        loading="lazy"
+        layout="intrinsic"
+        width={500}
+        height={500}
+        className={styles.bodyImage}
+      />
+    </div>
   )
 }
 
@@ -95,23 +101,26 @@ const Post: NextPage<Props> = ({ post: { title, slug, mainImage, body, categorie
         </span>
       </Link>
     </section>
-    {mainImage && <div className={styles.mainImage}>{getMainImageComp(mainImage)}</div>}
+    {mainImage && getBannerImageComp(mainImage)}
     <div className={styles.main}>
-      {categories && categories.length > 0 && (
-        <ul className={styles.categories}>
-          {categories.map((cat) => (
-            <Link key={cat.id} href={{ pathname: `/${cat.slug}` }}>
-              <li className={styles.category}>{cat.title}</li>
-            </Link>
-          ))}
-        </ul>
-      )}
-      <h1 className={styles.title}>{title}</h1>
-      {body && (
-        <section className={styles.body}>
-          <PortableText value={body} components={ptComponents} />
-        </section>
-      )}
+      <div className={styles.mainContent}>
+        {categories && categories.length > 0 && (
+          <ul className={styles.categories}>
+            {categories.map((cat) => (
+              <Link key={cat.id} href={{ pathname: `/${cat.slug}` }}>
+                <li className={styles.category}>{cat.title}</li>
+              </Link>
+            ))}
+          </ul>
+        )}
+        <h1 className={styles.title}>{title}</h1>
+        {body && (
+          <section className={styles.body}>
+            <PortableText value={body} components={ptComponents} />
+            {mainImage && getBodyImageComp(mainImage)}
+          </section>
+        )}
+      </div>
     </div>
     <Footer />
   </article>
